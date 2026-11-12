@@ -1,0 +1,1 @@
+syntax="proto3"; message Input {string name=1;} message Output {string value=1;} service Fixture {rpc Keep(Input) returns(Output); rpc Old(Input) returns(Output);}

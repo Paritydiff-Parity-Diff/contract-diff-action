@@ -1,0 +1,28 @@
+name: API contract example
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    paths: ['.acceptance/contracts/**']
+permissions:
+  contents: read
+  pull-requests: write
+concurrency:
+  group: contract-example-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: Paritydiff-Parity-Diff/contract-diff-action@bb5ff48f769ae73f34e28a833c1ea506c3fdab03
+        with:
+          token: ${{ github.token }}
+          comment: 'true'
+          contracts: |
+            [
+              {"path":".acceptance/contracts/contract.json","standard":"openapi"},
+              {"path":".acceptance/contracts/schema.graphql","standard":"graphql"},
+              {"path":".acceptance/contracts/service.proto","standard":"grpc"},
+              {"path":".acceptance/contracts/asyncapi.json","standard":"asyncapi"},
+              {"path":".acceptance/contracts/service.wsdl","standard":"soap"}
+            ]

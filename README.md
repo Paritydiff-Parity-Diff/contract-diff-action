@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: Paritydiff-Parity-Diff/contract-diff-action@REPLACE_WITH_FULL_COMMIT_SHA
+      - uses: Paritydiff-Parity-Diff/contract-diff-action@bb5ff48f769ae73f34e28a833c1ea506c3fdab03
         with:
           token: ${{ github.token }}
           comment: 'false'
