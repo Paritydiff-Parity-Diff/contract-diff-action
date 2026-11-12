@@ -1,0 +1,78 @@
+{
+  "captured": "2026-10-13",
+  "representation": "Vendored JSON uses lossless ASCII Unicode escapes; hashes bind local artifact bytes.",
+  "schemas": [
+    {
+      "filename": "openapi-3.0.json",
+      "source": "https://spec.openapis.org/oas/3.0/schema/2024-10-18",
+      "sha256": "2385f5bbb8c37878daae73baeabe7f34b2f022a4a8c049329ee61f71796f039c",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "swagger-2.0.json",
+      "source": "https://spec.openapis.org/oas/2.0/schema/2017-08-27",
+      "sha256": "b36871c8016292c5e66dd3b203e69aeff98bfef97e0b3c67c1909036095586a5",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.1.json",
+      "source": "https://spec.openapis.org/oas/3.1/schema/2026-08-03",
+      "sha256": "59f106413cb48c31299f96f024c938d3628aed6cd02cd14bcfb2fcaae7a130b6",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.1-base.json",
+      "source": "https://spec.openapis.org/oas/3.1/schema-base/2026-08-03",
+      "sha256": "ffdd07e28417bfa89de635d23a7476f7625497b8edd279f18c1424e613966d9a",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.1-meta.json",
+      "source": "https://spec.openapis.org/oas/3.1/meta/2024-11-10",
+      "sha256": "80706a9a404affedbf84ac4dc1328c9ce0d2a00804cdfc4d95c0ddd0053121dd",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.1-dialect.json",
+      "source": "https://spec.openapis.org/oas/3.1/dialect/2024-11-10",
+      "sha256": "647f32dfff64949d5020a28ecd1af4ffeffb1e9c695f861a52255a8004e07460",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.2.json",
+      "source": "https://spec.openapis.org/oas/3.2/schema/2026-08-30",
+      "sha256": "cb5ab4d9a7beb668278a85c1200ab66ad5107720d1122793d4ef0c380cd8d9bd",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.2-base.json",
+      "source": "https://spec.openapis.org/oas/3.2/schema-base/2026-08-30",
+      "sha256": "9df52b98a92075a917125364d23a5f70825d6c292c7aeb15c31b822e95f031e9",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.2-meta.json",
+      "source": "https://spec.openapis.org/oas/3.2/meta/2026-02-26",
+      "sha256": "f444d02ef7d36f30293983fad8118c823a3c70a49a8e5aa6f1afe21215e35417",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "openapi-3.2-dialect.json",
+      "source": "https://spec.openapis.org/oas/3.2/dialect/2026-02-26",
+      "sha256": "9375b7042aa0b01848403f0a9ebf12a3425e01a9e24337ce12624f10fea73833",
+      "license": "Apache-2.0"
+    },
+    {
+      "filename": "postman-2.0.json",
+      "source": "https://schema.postman.com/collection/json/v2.0.0/draft-07/collection.json",
+      "sha256": "cb48a7f220818cebf2a6b6623332e520e98156003e0a5e3fdaf0937c66810ead",
+      "license": "Postman schema copyright and license retained in artifact"
+    },
+    {
+      "filename": "postman-2.1.json",
+      "source": "https://schema.postman.com/collection/json/v2.1.0/draft-07/collection.json",
+      "sha256": "f1e8b99a063df167d355fd0e1e8e8bb78b88f34c8d6141a1d78bbbd7bd9c74ae",
+      "license": "Postman schema copyright and license retained in artifact"
+    }
+  ]
+}

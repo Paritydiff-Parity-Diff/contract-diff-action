@@ -1,0 +1,80 @@
+name: ParityDiff contract diff
+description: Compare API contracts in a GitHub pull request and publish deterministic compatibility findings.
+branding:
+  icon: git-pull-request
+  color: gray
+inputs:
+  contracts:
+    description: JSON array of repository paths and standards (openapi, graphql, grpc, asyncapi, soap).
+    required: true
+  token:
+    description: GitHub Actions token with contents read and pull request read, or write for comments.
+    required: true
+  comment:
+    description: Publish or update the pull request comment.
+    required: false
+    default: 'true'
+  fail-on-breaking:
+    description: Fail the check for breaking findings or incomplete comparisons.
+    required: false
+    default: 'false'
+outputs:
+  status:
+    description: Summary or comment outcome.
+    value: ${{ steps.compare.outputs.status }}
+  breaking:
+    description: Number of classified breaking findings.
+    value: ${{ steps.compare.outputs.breaking }}
+  incomplete:
+    description: Number of contracts with incomplete comparisons.
+    value: ${{ steps.compare.outputs.incomplete }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+      with:
+        node-version: 24
+    - name: Locate the trusted comparison engine
+      id: engine
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+      run: |
+        set -euo pipefail
+        root="$ACTION_PATH"
+        if [[ ! -f "$root/pnpm-workspace.yaml" ]]; then
+          root="$(cd "$root/../.." && pwd)"
+        fi
+        test -f "$root/tools/contract-diff-action/action.ts"
+        printf 'root=%s\n' "$root" >> "$GITHUB_OUTPUT"
+    - uses: pnpm/action-setup@b906affcce14559ad1aafd4ab0e942779e9f58b1
+      with:
+        version: 11.23.0
+        package_json_file: ${{ steps.engine.outputs.root }}/package.json
+        run_install: false
+    - name: Install pinned comparison dependencies
+      shell: bash
+      working-directory: ${{ steps.engine.outputs.root }}
+      run: pnpm --filter paritydiff --filter @paritydiff/detect... --filter @paritydiff/classify... install --frozen-lockfile --ignore-scripts
+    - name: Install the pinned SOAP schema validator
+      id: xsd
+      if: contains(inputs.contracts, '"soap"')
+      shell: bash
+      working-directory: ${{ steps.engine.outputs.root }}
+      run: |
+        set -euo pipefail
+        directory="$(mktemp -d "$RUNNER_TEMP/paritydiff-xsd.XXXXXXXX")"
+        python3 -m venv "$directory"
+        "$directory/bin/python" -m pip install --disable-pip-version-check --only-binary=:all: --require-hashes -r packages/detect/python/requirements.txt
+        printf 'python=%s/bin/python\n' "$directory" >> "$GITHUB_OUTPUT"
+    - name: Compare the pull request revisions
+      id: compare
+      shell: bash
+      working-directory: ${{ steps.engine.outputs.root }}
+      env:
+        CONTRACT_DIFF_FILES: ${{ inputs.contracts }}
+        CONTRACT_DIFF_TOKEN: ${{ inputs.token }}
+        CONTRACT_DIFF_COMMENT: ${{ inputs.comment }}
+        CONTRACT_DIFF_GATE: ${{ inputs.fail-on-breaking }}
+        XSD_PYTHON_BIN: ${{ steps.xsd.outputs.python }}
+      run: node --import tsx tools/contract-diff-action/action.ts

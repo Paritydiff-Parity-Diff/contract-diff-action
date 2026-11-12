@@ -1,0 +1,37 @@
+packages:
+  - 'packages/*'
+  - 'apps/*'
+  - 'vendors'
+
+networkConcurrency: 8
+fetchTimeout: 180000
+
+# Security overrides for transitive deps (high-severity advisories). Scoped by
+# version range so each major line gets its patched release.
+overrides:
+  're2js@>=2.2.0 <2.8.7': '2.8.7'
+  'brace-expansion@>=1.0.0 <1.1.21': '1.1.21'
+  'fast-uri@>=4.0.0 <4.1.4': '^4.1.4'
+  'fast-uri@>=3.0.0 <3.1.7': '^3.1.7'
+  'brace-expansion@5.0.9': '5.0.12'
+  'brace-expansion@>=2.0.0 <2.1.7': '2.1.7'
+  '@grpc/grpc-js@<1.13.6': '1.13.6'
+
+# esbuild (via tsup/tsx/vitest) ships prebuilt platform binaries through its
+# optional dependency; its install script is deliberately not run. Recording the
+# decision keeps the zero-dependency-build-scripts posture from spec section 12.
+allowBuilds:
+  '@firebase/util': false
+  esbuild: false
+  msgpackr-extract: false
+  protobufjs: false
+
+minimumReleaseAgeExclude:
+  - '@sentry/core@10.71.0'
+  - '@sentry/node-core@10.71.0'
+  - '@sentry/node@10.71.0'
+  - '@sentry/opentelemetry@10.71.0'
+  - '@sentry/server-utils@10.71.0'
+  - nodemailer@10.1.0
+  - '@asyncapi/parser@3.6.4'
+  - '@stomp/stompjs@7.5.0'

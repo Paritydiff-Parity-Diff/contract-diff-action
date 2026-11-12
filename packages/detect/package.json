@@ -1,0 +1,40 @@
+{
+  "name": "@paritydiff/detect",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./graphql-binding": "./src/graphql-binding.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@asyncapi/parser": "3.6.4",
+    "@napi-rs/canvas": "1.0.11",
+    "@paritydiff/core": "workspace:*",
+    "@stomp/stompjs": "7.5.0",
+    "@tesseract.js-data/eng": "1.0.0",
+    "@xmldom/xmldom": "0.9.12",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "ajv-legacy": "npm:ajv@6.15.0",
+    "amf-client-js": "5.15.0",
+    "amqplib": "2.2.0",
+    "avsc": "5.7.9",
+    "graphql": "17.0.2",
+    "kafkajs": "2.2.4",
+    "mqtt-packet": "9.0.2",
+    "pdfjs-dist": "6.4.299",
+    "protobufjs": "7.6.6",
+    "saxes": "6.0.0",
+    "tesseract.js": "7.0.0",
+    "tesseract.js-core": "7.0.0",
+    "tr46": "7.0.0",
+    "yaml": "^2.9.0"
+  }
+}
