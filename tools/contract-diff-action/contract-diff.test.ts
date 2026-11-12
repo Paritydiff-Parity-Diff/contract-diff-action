@@ -241,6 +241,21 @@ it('validates base GraphQL operations against both schemas without reading repla
 }, 30000);
 
 const token = 'ghs_' + 'a'.repeat(36);
+it('accepts opaque and JWT installation tokens without logging rejected credentials', () => {
+  expect(() => new GitHubContracts(token)).not.toThrow();
+  expect(
+    () => new GitHubContracts('ghs_123_' + 'eyJfixture-'.repeat(60) + '.payload.signature'),
+  ).not.toThrow();
+  for (const value of [
+    '',
+    'short',
+    'ghs_' + 'a'.repeat(9000),
+    token + '\r\ninjected: value',
+    token + ' ',
+  ]) {
+    expect(() => new GitHubContracts(value)).toThrow('A GitHub Actions token is required');
+  }
+});
 const base = 'b'.repeat(40);
 const head = 'c'.repeat(40);
 const tree = 'd'.repeat(40);

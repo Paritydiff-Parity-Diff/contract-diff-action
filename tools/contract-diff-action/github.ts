@@ -70,7 +70,7 @@ export class GitHubContracts {
     private readonly token: string,
     private readonly fetcher: typeof fetch = fetch,
   ) {
-    if (!/^[A-Za-z0-9_]{20,512}$/.test(token))
+    if (token.length < 20 || token.length > 8192 || !/^[A-Za-z0-9._~+/-]+=*$/.test(token))
       throw new Error('A GitHub Actions token is required');
   }
 
